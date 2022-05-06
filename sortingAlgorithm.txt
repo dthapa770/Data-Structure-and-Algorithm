@@ -1,0 +1,101 @@
+# bubble sort
+# This simple sorting algorithm iterates over a list, 
+# comparing elements in pairs and swapping them 
+# until the larger elements "bubble up" to the end of the list, 
+# and the smaller elements stay at the "bottom".
+
+def bubblesort(arr):
+    
+    swapped = True
+    
+    while swapped:
+        swapped = False
+        for i in range(len(arr) -1):
+            if arr[i] > arr[i+1]:
+                
+                arr[i],arr[i+1] = arr[i+1],arr[i]
+                print(arr)
+                swapped = True
+    return arr
+
+
+# selection sort
+# This algorithm segments the list into two parts: sorted and unsorted. 
+# We continuously remove the smallest element of the unsorted segment of the list 
+# and append it to the sorted segment.
+
+def selectionsort(arr):
+    
+    for i in range(len(arr)):
+        lowest_index = i     
+        for j in range(i+1, len(arr)):
+            if arr[j] < arr[lowest_index]:
+                lowest_index = j
+        arr[i],arr[lowest_index] = arr[lowest_index],arr[i]
+    return arr
+    
+    
+# insertion sort
+# this algorithm segments the list into sorted and unsorted parts. 
+# It iterates over the unsorted segment,
+# and inserts the element being viewed into the correct position of the sorted list.
+
+def insertionsort(arr):
+    
+    for i in range(1,len(arr)):
+        item_to_insert = arr[i]
+        j = i -1
+        
+        while j >= 0 and arr[j] > item_to_insert:
+            arr[j+1] = arr[j]
+            j -= 1
+        arr[j+1] = item_to_insert 
+        
+    return arr
+    
+    
+# mergesort
+# This divide and conquer algorithm splits a list in half,
+# and keeps splitting the list by 2 until it only has singular elements.
+
+# Adjacent elements become sorted pairs, 
+# then sorted pairs are merged and sorted with other pairs as well.
+# This process continues until we get a sorted list with all the elements of the unsorted input list.
+
+def merge(left_list, right_list):
+    res = []
+    left_list_index = 0
+    right_list_index = 0
+    
+    
+    left_length, right_length = len(left_list), len(right_list)
+    
+    for _ in range(left_length+right_length):
+        if left_list_index < left_length and right_list_index < right_length:
+            
+            if left_list[left_list_index] <= right_list[right_list_index]:
+                res.append(left_list[left_list_index])
+                left_list_index += 1
+            else:
+                res.append(right_list[right_list_index])
+                right_list_index += 1
+        elif left_list_index == left_length:
+            res.append(right_list[right_list_index])
+            right_list_index += 1
+        elif right_list_index == right_length:
+            res.append(left_list[left_list_index])
+            left_list_index += 1
+    return res
+                
+                
+    
+def mergesort(arr):
+    if len(arr) <= 1:
+        return arr
+    
+    mid = len(arr) //2
+    
+    left_list = mergesort(arr[:mid])
+    right_list = mergesort(arr[mid:])
+    
+    return merge(left_list, right_list)
