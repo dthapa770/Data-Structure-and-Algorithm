@@ -1,0 +1,58 @@
+class Stack {
+    
+    constructor () {
+        this.stack =[]
+        this.count = 0
+    }
+    
+    push(element){
+        if(!element){
+            return;
+        }
+        this.stack[this.count] = element
+        this.count++
+        return this.count-1;      
+    }
+    
+    pop(){
+        
+        if ( this.count ==0) return undefined
+       
+        return this.stack.pop();
+        
+    }
+    
+    // get length of stack
+    length(){
+        return this.count
+    }
+    
+    // get the first element in a stack without removing
+    peek(){
+        return this.stack[this.count-1]
+    }
+    
+    //returns true if stack is empty
+    is_empty(){
+        return this.count ==0
+    }
+    
+    //to print
+    
+    print(){
+       let str =''
+       
+       for ( let i =0 ; i< this.count; i++){
+           str = str+ this.stack[i]+' '
+       }
+        return str;
+    }
+    
+    // clear stack
+    
+    clear(){
+        this.stack =[]
+        this.count =0
+        return this.stack
+    }
+}
