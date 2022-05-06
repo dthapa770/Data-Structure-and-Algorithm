@@ -1,0 +1,41 @@
+class HashMap{
+    
+    constructor(){
+        this._storage =[]
+    }
+    
+    hash_str (str){
+        let final_hash = 0;
+        for ( let i =0; i< str.length; i++){
+            const char_code = str.charCodeAt(i)
+            final_hash += char_code
+        }
+        
+        return final_hash 
+    }
+    
+    set(key,value){
+        
+        let idx = this.hash_str(key)
+        
+        if (!this._storage[idx]){
+            this._storage[idx]=[]
+        }
+        this._storage[idx].push([key,value]);
+        
+    }
+    
+    get(key){
+        let idx = this.hash_str(key)
+        if (!this._storage[idx]){
+            return undefined
+        }
+        
+        for( const ele of this._storage[idx]){
+            console.log(ele[0])
+            console.log(ele[1])
+            if ( ele[0] == key) return ele[1]
+        }
+        
+    }
+}
