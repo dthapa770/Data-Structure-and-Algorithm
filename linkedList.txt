@@ -1,0 +1,90 @@
+
+class LinkedList{
+
+  constructor (){
+    this.head= null;
+    this.tail = null;
+  }
+
+  // add element start of the list
+  prepend (value) {
+    const new_node = {value:value, next: this.head}
+    
+    this.head = new_node
+    
+    if ( !this.tail){
+      this.tail = new_node
+    } 
+  }
+  
+  //add elements end of the list
+  append(value) {
+    
+    const new_node = { value:value, next:null};
+
+    if ( this.tail){
+      this.tail.next = new_node
+    }
+    this.tail = new_node
+
+    if( !this.head){
+      this.head = new_node
+    }  
+  }
+
+    //changed liked list to an array
+  toArray(){
+    const elements =[]
+    let cur_node = this.head
+
+    while ( cur_node){
+      elements.push(cur_node)
+      cur_node = cur_node.next
+    }
+
+    return elements;
+  }
+    
+    // delete node
+    
+    delete(value){
+        if (!this.head){
+            return;
+        }
+        
+        while ( this.head && this.head.value === value){
+            this.head = this.head.next;
+        }
+        let cur_node = this.head;
+        
+        while( cur_node.next){
+            if ( cur_node.next.value === value){
+                cur_node.next = cur_node.next.next;
+            }
+            else{
+                cur_node = cur_node.next
+            }
+        }
+        
+        if (this.tail.value === value){
+            this.tail = cur_node
+        }
+    }
+
+    //find value in first occurence
+    
+    find(value){
+        if ( !this.head){
+            return;
+        }
+        let cur_node = this.head
+        
+        
+        while( cur_node){
+            if ( cur_node.value === value){
+                return cur_node
+            }
+            cur_node = cur_node.next;
+        }
+    }
+}
